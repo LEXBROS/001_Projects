@@ -22,14 +22,15 @@ if len(name_list) == len(coord_list):
         long_list.append(tmp_list[0])
         lat_list.append(tmp_list[1])
         
-    print(name_list)
-    print(long_list)
-    print(lat_list)
+    # debug
+    # print(name_list)
+    # print(long_list)
+    # print(lat_list)
 
     output_text = ''
 
     for j in range(len(name_list)):
-        output_text += name_list[j] + ';' + long_list[j] + ';' + lat_list[j] + '\n'
+        output_text += name_list[j] + ';' + lat_list[j] + ';' + long_list[j] + '\n'
 
     out_file_name = 'Cat_' + category_list[0] + '.txt'
 
