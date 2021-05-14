@@ -3,12 +3,14 @@
 
 import re
 
+category_name_pattern = r"<Folder>\n{1}\s{6}<name>(.*)?</name>"
 name_pattern = r"<Placemark>\n{1}\s{8}<name>(.*)</name>"
 coord_pattern = r"<coordinates>(.*)</coordinates>"
 
 with open('INPUT.kml', 'r', encoding='utf-8') as kml:
     text = kml.read()
     
+category_list = re.findall(category_name_pattern, text)
 name_list = re.findall(name_pattern, text)
 coord_list = re.findall(coord_pattern, text)
 
@@ -24,8 +26,15 @@ if len(name_list) == len(coord_list):
     print(long_list)
     print(lat_list)
 
+    output_text = ''
 
-# ОСТАЛОСЬ ДОБАВИТЬ ЗАПИСЬ В ФАЙЛ
+    for j in range(len(name_list)):
+        output_text += name_list[j] + ';' + long_list[j] + ';' + lat_list[j] + '\n'
+
+    out_file_name = 'Cat_' + category_list[0] + '.txt'
+
+    with open(out_file_name, 'x', encoding='utf-8') as txt:
+        txt.write(output_text)
     
 else:
     print("Количество имен не соответствует количеству координат!")
